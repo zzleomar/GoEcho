@@ -3,22 +3,32 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home</title>
+    <title>Usuarios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="public/app.css" />
 </head>
 <body>
-    <ul>
-        <li>usu1</li>
-        <li>usu2</li>
-        <li>usu3</li>
-        <li>usu4</li>
-        <li>usu5</li>
-        <li>usu6</li>
-        <li>usu7</li>
-        <li>usu8</li>
-        <li>usu9</li>
-        <li>usu10</li>
-    </ul>
+    <h2>Lista de Usuarios</h2>
+
+    <div id="content"></div>
+    <button id="reload">add</button>
+    <script>
+        const getData = async () => {
+            const req = await fetch("http://localhost:1323/api/usuarios")
+            const data = await req.json()
+            drawData(data)
+        }
+        const drawData = data =>{
+            data.forEach(e => {
+                const html=`<div>${e.name}</div>`
+                content.insertAdjacentHTML('beforeend', html)
+            });
+        } 
+        getData();
+        reload.addEventListener('click', e =>{
+            e.preventDefault();
+            getData();
+        })
+    </script>
 </body>
 </html>
